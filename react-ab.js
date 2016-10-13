@@ -10,6 +10,7 @@
 })(this, function (React) {
   "use strict";
 
+  var cookie = require('react-cookie');
   var exports = {};
 
   /* istanbul ignore next */
@@ -25,38 +26,21 @@
 
   var browserCookie = {
     get: function (name) {
-      var eq = name + "="
-        , ca = document.cookie.split(";")
-        , c = null;
-      for(var i=0;i < ca.length;i += 1) {
-        c = ca[i];
-        while (c.charAt(0) === " ") {
-          c = c.substring(1, c.length);
-        }
-        if (c.indexOf(eq) === 0) {
-          return decodeURIComponent(c.substring(eq.length, c.length));
-        }
-      }
-      return null;
+      var cookieValue = cookie.load(name);
+      return cookieValue ? decodeURIComponent(cookieValue) : null;
     }
 
     , set: function (name, value, seconds) {
-      var key = name + "=" + encodeURIComponent(value)
-        , expires = ""
-        , path = "path=/"
-        , date = null;
-
       seconds = typeof seconds === "undefined" ? 365 * 24 * 60 * 60 : seconds;
-
       date = new Date();
       date.setTime(date.getTime()+(seconds*1000));
       expires = "expires=" + date.toGMTString();
 
-      document.cookie = [key, expires, path].join(";");
+      cookie.save(name, encodeURIComponent(value), {expires: expires, path: '/'})
     }
 
     , clear: function (name) {
-      browserCookie.set(name, "", -1);
+        cookie.remove(name, {path: '/'}); // path not needed though.
     }
   };
 

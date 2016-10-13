@@ -4,7 +4,8 @@
   "description": "Simple declarative and universal A/B testing component for React.",
   "main": "react-ab.js",
   "peerDependencies": {
-    "react": ">= 0.13.0"
+    "react": ">= 0.13.0",
+    "react-cookie": "^0.4.8"
   },
   "devDependencies": {
     "react": "^0.13.0"
