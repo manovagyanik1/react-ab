@@ -34,7 +34,7 @@
       seconds = typeof seconds === "undefined" ? 365 * 24 * 60 * 60 : seconds;
       var date = new Date();
       date.setTime(date.getTime()+(seconds*1000));
-      expires = "expires=" + date.toGMTString();
+      var expires = "expires=" + date.toGMTString();
 
       reactCookie.save(name, encodeURIComponent(value), {expires: expires, path: '/'})
     }
