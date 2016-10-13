@@ -32,7 +32,7 @@
 
     , set: function (name, value, seconds) {
       seconds = typeof seconds === "undefined" ? 365 * 24 * 60 * 60 : seconds;
-      date = new Date();
+      date = Date.now();
       date.setTime(date.getTime()+(seconds*1000));
       expires = "expires=" + date.toGMTString();
 
