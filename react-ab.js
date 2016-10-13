@@ -10,7 +10,7 @@
 })(this, function (React) {
   "use strict";
 
-  var cookie = require('react-cookie');
+  var reactCookie = require('react-cookie');
   var exports = {};
 
   /* istanbul ignore next */
@@ -36,13 +36,17 @@
       date.setTime(date.getTime()+(seconds*1000));
       expires = "expires=" + date.toGMTString();
 
-      cookie.save(name, encodeURIComponent(value), {expires: expires, path: '/'})
+      reactCookie.save(name, encodeURIComponent(value), {expires: expires, path: '/'})
     }
 
     , clear: function (name) {
-        cookie.remove(name, {path: '/'}); // path not needed though.
+        reactCookie.remove(name, {path: '/'}); // path not needed though.
     }
   };
+
+  exports.plugToRequest = function(req, res) {
+    reactCookie.plugToRequest(req, res);
+  }
 
   exports.Variant = React.createClass({
     displayName: "Variant"
