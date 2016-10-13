@@ -26,7 +26,7 @@
 
   var browserCookie = {
     get: function (name) {
-      var cookieValue = cookie.load(name);
+      var cookieValue = reactCookie.load(name);
       return cookieValue ? decodeURIComponent(cookieValue) : null;
     }
 
